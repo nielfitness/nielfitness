@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jouwdomein — Moderne, snelle one‑pager</title>
+  <meta name="description" content="Korte beschrijving van je site of zaak. Max. 155 tekens voor SEO." />
+
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="Jouwdomein — Moderne, snelle one‑pager" />
+  <meta property="og:description" content="Korte beschrijving van je site of zaak." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://jouwdomein.be" />
+  <meta property="og:image" content="https://jouwdomein.be/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- PWA basics (optioneel) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🚀</text></svg>"> 
+
+  <!-- Inlined, production-grade CSS: licht, responsief, toegankelijk -->
+  <style>
+    :root{
+      --bg: #ffffff; --fg: #222; --muted:#666; --brand:#4f46e5; --brand-2:#06b6d4; --card:#fafafa; --border:#eee; --shadow: 0 10px 30px rgba(0,0,0,.08);
+      --max: 1100px; --radius: 16px;
+    }
+    @media (prefers-color-scheme: dark){
+      :root{ --bg:#0b0b10; --fg:#f5f7fb; --muted:#a8afbd; --card:#12121a; --border:#20202b; --shadow: 0 10px 30px rgba(0,0,0,.35);}  
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{max-width:var(--max);margin:auto;padding:0 1rem}
+    header.site{position:sticky;top:0;backdrop-filter:saturate(180%) blur(10px);background:color-mix(in oklab, var(--bg) 85%, transparent);border-bottom:1px solid var(--border);z-index:9}
+    .nav{display:flex;align-items:center;justify-content:space-between; height:64px}
+    .brand{display:flex;gap:.6rem;align-items:center}
+    .brand .logo{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff;font-weight:700;box-shadow:var(--shadow)}
+    .brand span{font-weight:700}
+    .menu{display:flex;gap:1rem}
+    .menu a{padding:.4rem .6rem;border-radius:.6rem}
+    .menu a:hover{background:var(--card)}
+    .hamb{display:none}
+    @media (max-width: 760px){ .menu{display:none} .hamb{display:block} }
+
+    /* Hero */
+    .hero{position:relative;overflow:hidden}
+    .hero .wrap{display:grid;grid-template-columns: 1.2fr 1fr; gap:2rem; padding:4rem 0 3rem}
+    .hero h1{margin:.2rem 0;font-size:clamp(2.2rem, 3.8vw, 3.3rem);line-height:1.15}
+    .hero p{color:var(--muted);max-width:60ch}
+    .cta{display:inline-flex;gap:.5rem;align-items:center;margin-top:1rem;padding:.9rem 1.1rem;border-radius:.8rem;border:1px solid var(--border);background:linear-gradient(135deg,color-mix(in oklab, var(--brand) 18%, transparent), color-mix(in oklab, var(--brand-2) 12%, transparent));box-shadow:var(--shadow)}
+    .cta strong{font-weight:700}
+    .hero-card{background:var(--card);border:1px solid var(--border);padding:1rem;border-radius:var(--radius);box-shadow:var(--shadow)}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr); gap:1rem;margin-top:1rem}
+    .stat{padding:1rem;background:var(--bg);border:1px solid var(--border);border-radius:12px;text-align:center}
+    .stat b{font-size:1.4rem;display:block}
+    svg.wave{position:absolute;left:-5%;bottom:-15%;width:120%;height:auto;opacity:.25}
+    @media (max-width: 980px){ .hero .wrap{grid-template-columns:1fr} }
+
+    /* Sections */
+    section{padding:3.5rem 0}
+    .section-title{font-size:1.8rem;margin:0 0 .6rem}
+    .muted{color:var(--muted)}
+    .grid{display:grid;gap:1rem;grid-template-columns:repeat(3,1fr)}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem;box-shadow:var(--shadow)}
+    @media (max-width:980px){ .grid{grid-template-columns:repeat(2,1fr)} }
+    @media (max-width:640px){ .grid{grid-template-columns:1fr} }
+
+    /* Pricing/table */
+    .price{display:flex;gap:.4rem;align-items:baseline}
+    .price b{font-size:2rem}
+
+    /* Footer */
+    footer{border-top:1px solid var(--border);padding:2.2rem 0;color:var(--muted)}
+
+    /* Mobile menu */
+    .drawer{position:fixed;inset:0;background:color-mix(in oklab, var(--bg) 80%, black 20%);display:none}
+    .drawer.open{display:block}
+    .sheet{position:absolute;right:0;top:0;height:100%;width:min(85%,360px);background:var(--bg);border-left:1px solid var(--border);padding:1rem 1rem}
+    .sheet a{display:block;padding:.7rem .6rem;border-radius:.6rem}
+    .sheet a:hover{background:var(--card)}
+
+    /* Utilities */
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .center{display:grid;place-items:center}
+  </style>
+
+  <!-- ⭐ Analytics (kies er max. 1) -->
+  <!-- Cloudflare Web Analytics (cookieloos, gratis): voeg hier je beacon-script in uit je Cloudflare-dashboard. -->
+  <!-- <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"JOUW-TOKEN"}'></script> -->
+
+  <!-- Google Analytics 4 (gratis, meestal met cookie-toestemming in EU). Vervang G-XXXXXXX. -->
+  <!--
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXX', { anonymize_ip: true });
+  </script>
+  -->
+
+  <!-- Structured Data (JSON-LD) – pas aan of verwijder -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Jouwdomein",
+    "url": "https://jouwdomein.be",
+    "logo": "https://jouwdomein.be/logo.png"
+  }
+  </script>
+</head>
+<body>
+  <a class="sr-only" href="#main">Ga naar inhoud</a>
+  <header class="site" aria-label="Hoofdnavigatie">
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">J</div>
+        <span>Jouwdomein</span>
+      </div>
+      <nav class="menu" aria-label="Primair">
+        <a href="#diensten">Diensten</a>
+        <a href="#werk">Werk</a>
+        <a href="#schema">Trainingschema's</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="hamb" aria-label="Open menu" aria-controls="drawer" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero">
+      <svg class="wave" viewBox="0 0 1440 320" preserveAspectRatio="none" aria-hidden="true">
+        <path fill="url(#g)" d="M0,224L60,213.3C120,203,240,181,360,186.7C480,192,600,224,720,229.3C840,235,960,213,1080,181.3C1200,149,1320,107,1380,85.3L1440,64L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
+        <defs>
+          <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0%" stop-color="currentColor"/>
+            <stop offset="100%" stop-color="currentColor"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="container wrap">
+        <div>
+          <h1>Maak indruk met een snelle, moderne site</h1>
+          <p>Vertel hier in 1–2 zinnen wat je doet, voor wie, en wat het voordeel is. Hou het concreet en klantgericht.</p>
+          <a class="cta" href="#contact"><strong>Contacteer mij</strong> →</a>
+          <div class="stats" aria-label="Kernstatistieken">
+            <div class="stat"><b>1000+</b><span>Tevreden bezoekers</span></div>
+            <div class="stat"><b>0.9s</b><span>Laadtijd</span></div>
+            <div class="stat"><b>99.9%</b><span>Uptime</span></div>
+          </div>
+        </div>
+        <div class="hero-card" aria-label="Voorbeeldkaart">
+          <h3 style="margin-top:0">Snel. Toegankelijk. SEO‑proof.</h3>
+          <p class="muted">Deze template is licht (<1 KB JS), responsief, en klaar voor analytics. Vervang teksten/secties en je bent live.</p>
+          <ul>
+            <li>Responsief raster en kaarten</li>
+            <li>Sticky navigatie + mobiel menu</li>
+            <li>SEO + JSON‑LD + OG-tags</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- DIENSTEN -->
+    <section id="diensten">
+      <div class="container">
+        <h2 class="section-title">Diensten</h2>
+        <p class="muted">Wat bied je aan? 3–6 tegels werkt goed.</p>
+        <div class="grid" role="list">
+          <article class="card" role="listitem">
+            <h3>Consultancy</h3>
+            <p>Korte, heldere omschrijving van deze dienst.</p>
+          </article>
+          <article class="card" role="listitem">
+            <h3>Ontwerp</h3>
+            <p>Wat het oplevert en waarom het nuttig is.</p>
+          </article>
+          <article class="card" role="listitem">
+            <h3>Implementatie</h3>
+            <p>Resultaatgericht, iteratief, met testing.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO/CASESTUDIES -->
+    <section id="werk">
+      <div class="container">
+        <h2 class="section-title">Werk</h2>
+        <p class="muted">Een paar referenties of casestudies.</p>
+        <div class="grid">
+          <article class="card"><h3>Project A</h3><p>Korte beschrijving van het probleem en de oplossing.</p></article>
+          <article class="card"><h3>Project B</h3><p>Impact of metrics: +35% conversie, −1.2s laadtijd.</p></article>
+          <article class="card"><h3>Project C</h3><p>Wat was je rol? Wat leverde het op?</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRIJZEN/TIERS (optioneel) -->
+    <section id="schema">
+      <div class="container">
+        <h2 class="section-title">Online Trainingschema’s</h2>
+        <p class="muted">Kies een optie. Bij het klikken open ik een <b>WhatsApp</b>-knop (geen betalingsmogelijkheden).</p>
+        <div class="grid">
+          <article class="card">
+            <h3>Basis</h3>
+            <ul>
+              <li>Persoonlijk schema (4 weken)</li>
+              <li>1×/week check‑in via WhatsApp</li>
+              <li>Correcties & aanpassingen</li>
+            </ul>
+            <button class="cta plan-cta" data-plan="Basis"><strong>Kies Basis</strong> →</button>
+          </article>
+          <article class="card">
+            <h3>Plus</h3>
+            <ul>
+              <li>Schema (8 weken) + progressieplan</li>
+              <li>2×/week check‑in via WhatsApp</li>
+              <li>Voedingsrichtlijnen (basis)</li>
+            </ul>
+            <button class="cta plan-cta" data-plan="Plus"><strong>Kies Plus</strong> →</button>
+          </article>
+          <article class="card">
+            <h3>Elite</h3>
+            <ul>
+              <li>Schema (12 weken) volledig op maat</li>
+              <li>Onbeperkte chat & wekelijkse evaluatie</li>
+              <li>Techniekvideo‑review</li>
+            </ul>
+            <button class="cta plan-cta" data-plan="Elite"><strong>Kies Elite</strong> →</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="container">
+        <h2 class="section-title">Contact</h2>
+        <p class="muted">Vragen of samenwerken? Stuur gerust een bericht.</p>
+        <form name="contact" class="card" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="contact" />
+          <p class="sr-only">
+            <label>Laat dit veld leeg: <input name="bot-field" /></label>
+          </p>
+          <label>
+            <span class="sr-only">Naam</span>
+            <input required name="name" placeholder="Naam" aria-label="Naam" style="width:100%;padding:.9rem;border-radius:.6rem;border:1px solid var(--border);background:var(--bg);color:var(--fg);margin:.4rem 0" />
+          </label>
+          <label>
+            <span class="sr-only">E‑mail</span>
+            <input required type="email" name="email" placeholder="E‑mail" aria-label="E‑mail" style="width:100%;padding:.9rem;border-radius:.6rem;border:1px solid var(--border);background:var(--bg);color:var(--fg);margin:.4rem 0" />
+          </label>
+          <label>
+            <span class="sr-only">Bericht</span>
+            <textarea required name="message" placeholder="Bericht" rows="5" aria-label="Bericht" style="width:100%;padding:.9rem;border-radius:.6rem;border:1px solid var(--border);background:var(--bg);color:var(--fg);margin:.4rem 0"></textarea>
+          </label>
+          <button class="cta" type="submit"><strong>Verstuur</strong></button>
+          <p class="muted" style="margin:.6rem 0 0">Dit formulier wordt verwerkt door Netlify Forms. Je vindt inzendingen in je Netlify-dashboard.</p>
+        </form>
+        <p style="margin-top:1rem">Of mail naar <a href="mailto:info@jouwdomein.be">info@jouwdomein.be</a> • Tel. 012 34 56 78</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <small>© <span id="year"></span> Jouwdomein — Alle rechten voorbehouden.</small>
+    </div>
+  </footer>
+
+  <!-- Plan kiezen (WhatsApp) -->
+  <div id="planDrawer" class="drawer" hidden>
+    <div class="sheet" role="dialog" aria-modal="true" aria-label="Plan kiezen">
+      <p style="display:flex;justify-content:space-between;align-items:center;margin:0 0 .5rem">
+        <b style="font-size:1.1rem">Start met <span id="planName">Plan</span></b>
+        <button id="closePlanDrawer" aria-label="Sluit venster">✕</button>
+      </p>
+      <p class="muted">Je ziet hier geen betalingsopties. Je start via WhatsApp en rondt betaling later af.</p>
+      <a id="waBtn" class="cta" target="_blank" rel="noopener"><strong>Chat op WhatsApp</strong> →</a>
+      <p class="muted" style="margin-top:.5rem">WhatsApp: +32 494 27 14 45</p>
+    </div>
+  </div>
+
+  <!-- Mobiel menu & kleine helpers -->
+  <div id="drawer" class="drawer" hidden>
+    <div class="sheet" role="dialog" aria-modal="true" aria-label="Mobiel menu">
+      <p style="display:flex;justify-content:space-between;align-items:center;margin:0 0 .5rem">
+        <b style="font-size:1.1rem">Menu</b>
+        <button id="closeDrawer" aria-label="Sluit menu">✕</button>
+      </p>
+      <a href="#diensten">Diensten</a>
+      <a href="#werk">Werk</a>
+      <a href="#prijzen">Prijzen</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+
+  <script>
+    // Jaar updaten
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobiel menu
+    const hamb = document.querySelector('.hamb');
+    const drawer = document.getElementById('drawer');
+    const closeBtn = document.getElementById('closeDrawer');
+    hamb.addEventListener('click', () => {
+      drawer.classList.add('open');
+      drawer.hidden = false;
+      hamb.setAttribute('aria-expanded','true');
+    });
+    closeBtn.addEventListener('click', () => {
+      drawer.classList.remove('open');
+      drawer.hidden = true;
+      hamb.setAttribute('aria-expanded','false');
+    });
+    drawer.addEventListener('click', (e)=>{ if(e.target === drawer){ closeBtn.click(); }});
+  </script>
+<script>
+    // Plan drawer (WhatsApp)
+    const planDrawer = document.getElementById('planDrawer');
+    const closePlan = document.getElementById('closePlanDrawer');
+    const planNameEl = document.getElementById('planName');
+    const waBtn = document.getElementById('waBtn');
+    function openPlan(plan){
+      planNameEl.textContent = plan;
+      const msg = 'Hallo! Ik wil starten met het ' + plan + ' online trainingschema.';
+      waBtn.href = 'https://wa.me/32494271445?text=' + encodeURIComponent(msg);
+      planDrawer.classList.add('open');
+      planDrawer.hidden = false;
+    }
+    document.querySelectorAll('.plan-cta').forEach(btn => {
+      btn.addEventListener('click', () => openPlan(btn.dataset.plan));
+    });
+    closePlan.addEventListener('click', () => {
+      planDrawer.classList.remove('open');
+      planDrawer.hidden = true;
+    });
+    planDrawer && planDrawer.addEventListener('click', (e) => { if(e.target === planDrawer){ closePlan.click(); } });
+  </script>
+</body>
+</html>
