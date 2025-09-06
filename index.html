@@ -13,7 +13,7 @@
 
   <style>
     :root{
-      --bg:#ffffff; --fg:#1f2937; --muted:#6b7280;
+      --bg:#ffffff; --fg:#1f2937; --muted:#4b5563;
       --brand:#2563eb; --brand-2:#06b6d4;
       --card:#f9fafb; --border:#e5e7eb; --shadow: 0 10px 24px rgba(0,0,0,.06);
       --max: 1180px; --radius: 18px; --header:72px;
@@ -26,18 +26,17 @@
     a:hover{text-decoration:underline}
     .container{max-width:var(--max);margin:auto;padding:0 1rem}
 
-    /* Header (lighter, no N logo) */
+    /* Header */
     header.site{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.92);backdrop-filter:saturate(160%) blur(8px);border-bottom:1px solid var(--border)}
     .nav{display:flex;align-items:center;justify-content:space-between;height:var(--header)}
-    .brand{display:flex;gap:.6rem;align-items:center}
     .brand span{font-weight:800;font-size:1.15rem;letter-spacing:.2px}
     .menu{display:flex;gap:1rem;align-items:center}
     .menu a{padding:.45rem .7rem;border-radius:.7rem;color:var(--fg)}
     .menu a:hover{background:var(--card)}
     .socials{display:flex;gap:.5rem;align-items:center;margin-left:.3rem}
-    .icon{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:999px;background:#fff;border:1px solid var(--border);box-shadow:var(--shadow);font-size:18px}
+    .icon{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:999px;background:#fff;border:1px solid var(--border);box-shadow:var(--shadow)}
+    .icon svg{width:18px;height:18px;display:block}
     .icon:hover{background:#fdfefe}
-    .icon span{line-height:1}
     .hamb{display:none}
     @media (max-width:900px){ .menu{display:none} .hamb{display:block} }
 
@@ -51,8 +50,8 @@
     .hero .overlay{position:absolute;inset:0;background:linear-gradient(180deg, rgba(255,255,255,.0) 0%, rgba(255,255,255,.55) 55%, rgba(255,255,255,1) 100%)}
     .hero .content{position:relative;padding:clamp(1.5rem,4vw,2rem) 0 2.2rem}
     .eyebrow{display:inline-block;color:#0b7; background:#e8fff5; border:1px solid #baf2d7; padding:.25rem .55rem;border-radius:.55rem;font-weight:600}
-    .hero h1{margin:.7rem 0 .3rem;font-size:clamp(2.1rem,5.2vw,3.4rem);line-height:1.07}
-    .hero p{color:var(--muted);max-width:65ch}
+    .hero h1{margin:.7rem 0 .3rem;font-size:clamp(2.1rem,5.2vw,3.4rem);line-height:1.07;color:#0b0b10}
+    .hero .lead{color:#0b0b10;background:rgba(255,255,255,.88);backdrop-filter:saturate(120%) blur(2px);border:1px solid var(--border);border-radius:.8rem;padding:.75rem 1rem;max-width:70ch}
     .cta{display:inline-flex;gap:.5rem;align-items:center;margin-top:1rem;padding:.95rem 1.2rem;border-radius:.9rem;border:1px solid var(--border);
       background:linear-gradient(135deg, rgba(37,99,235,.1), rgba(6,182,212,.08));box-shadow:var(--shadow);color:var(--fg);font-weight:700}
     .cta.secondary{background:#fff}
@@ -67,7 +66,7 @@
     @media (max-width:980px){ .grid{grid-template-columns:repeat(2,1fr)} }
     @media (max-width:640px){ .grid{grid-template-columns:1fr} }
 
-    /* Drawers (WhatsApp panel) must be above header */
+    /* Drawers */
     .drawer{position:fixed;inset:0;background:rgba(0,0,0,.35);display:none;z-index:200}
     .drawer.open{display:block}
     .sheet{position:absolute;right:0;top:0;height:100%;width:min(85%,360px);background:var(--bg);border-left:1px solid var(--border);padding:1rem 1rem;box-shadow:var(--shadow)}
@@ -82,9 +81,7 @@
   <a class="sr-only" href="#main">Ga naar inhoud</a>
   <header class="site" aria-label="Hoofdnavigatie">
     <div class="container nav">
-      <div class="brand">
-        <span>nielfitness</span>
-      </div>
+      <div class="brand"><span>nielfitness</span></div>
       <nav class="menu" aria-label="Primair">
         <a href="#aanpak">Aanpak</a>
         <a href="#pakketten">Pakketten</a>
@@ -92,10 +89,20 @@
         <a href="#contact">Contact</a>
         <span class="socials">
           <a class="icon" href="https://www.tiktok.com/@nielfitness" target="_blank" rel="noopener" aria-label="TikTok">
-            <span aria-hidden="true">🎵</span>
+            <!-- TikTok-like note icon (SVG) -->
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <title>TikTok</title>
+              <path fill="currentColor" d="M14 3v6.2c0 2.43-1.97 4.4-4.4 4.4A3.8 3.8 0 0 0 5.8 17.4 3.8 3.8 0 0 0 9.6 21c2.43 0 4.4-1.97 4.4-4.4V9.9c1.63 1.06 3.37 1.62 5.4 1.65V8.2c-1.9-.06-3.53-.62-5.4-1.7V3h-0z"/>
+            </svg>
           </a>
           <a class="icon" href="https://www.instagram.com/niel.stffs" target="_blank" rel="noopener" aria-label="Instagram">
-            <span aria-hidden="true">📸</span>
+            <!-- Instagram-like camera icon (SVG) -->
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <title>Instagram</title>
+              <rect x="3" y="3" width="18" height="18" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/>
+              <circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/>
+              <circle cx="17.2" cy="6.8" r="1.5" fill="currentColor"/>
+            </svg>
           </a>
         </span>
       </nav>
@@ -107,14 +114,13 @@
     <!-- HERO -->
     <section class="hero" id="home" aria-label="Hero">
       <div class="bg">
-        <!-- Robust fallback image loader -->
         <img id="heroimg" alt="Progressfoto in de gym">
       </div>
       <div class="overlay" aria-hidden="true"></div>
       <div class="container content">
         <span class="eyebrow">Online transformatiecoaching</span>
         <h1>Bouw een fysiek waar je trots op bent</h1>
-        <p>Je hoeft niet nóg een app of ingewikkelde theorie. Je hebt een <b>helder plan</b> nodig dat je <b>aanstuurt</b>. Ik lever trainings- en voedingsschema’s + accountability via WhatsApp. Minder twijfelen, meer uitvoeren — en resultaat.</p>
+        <p class="lead">Je hoeft niet nóg een app of ingewikkelde theorie. Je hebt een <b>helder plan</b> nodig dat je <b>aanstuurt</b>. Ik lever trainings- en voedingsschema’s + accountability via WhatsApp. Minder twijfelen, meer uitvoeren — en resultaat.</p>
         <div style="display:flex;gap:.6rem;flex-wrap:wrap">
           <a class="cta" href="https://wa.me/32494271445?text=Hallo!%20Ik%20wil%20starten%20met%20coaching%20bij%20nielfitness." target="_blank" rel="noopener"><strong>Start via WhatsApp</strong> →</a>
           <a class="cta secondary" href="#pakketten"><strong>Bekijk pakketten</strong></a>
@@ -125,7 +131,7 @@
     <!-- BENEFITS -->
     <section id="aanpak" class="section">
       <div class="container">
-        <h2 class="section-title">Waarom dit zichzelf verkoopt</h2>
+        <h2 class="section-title">Hoe help ik</h2>
         <div class="grid">
           <article class="card"><h3>Doen i.p.v. twijfelen</h3><p>Precies weten wat je vandaag traint en eet. Geen tijdverlies met zoeken of raden.</p></article>
           <article class="card"><h3>Accountability</h3><p>Check‑ins via WhatsApp houden je scherp. Terugval? We sturen bij.</p></article>
@@ -207,7 +213,7 @@
     </div>
   </footer>
 
-  <!-- WhatsApp drawer (above header) -->
+  <!-- WhatsApp drawer -->
   <div id="planDrawer" class="drawer" hidden>
     <div class="sheet" role="dialog" aria-modal="true" aria-label="Plan kiezen">
       <p style="display:flex;justify-content:space-between;align-items:center;margin:0 0 .5rem">
@@ -231,8 +237,22 @@
       <a href="#pakketten">Pakketten</a>
       <a href="#faq">FAQ</a>
       <a href="#contact">Contact</a>
-      <a class="icon" href="https://www.tiktok.com/@nielfitness" target="_blank" rel="noopener" aria-label="TikTok">🎵</a>
-      <a class="icon" href="https://www.instagram.com/niel.stffs" target="_blank" rel="noopener" aria-label="Instagram">📸</a>
+      <div style="display:flex;gap:.5rem;margin-top:.6rem">
+        <a class="icon" href="https://www.tiktok.com/@nielfitness" target="_blank" rel="noopener" aria-label="TikTok">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <title>TikTok</title>
+            <path fill="currentColor" d="M14 3v6.2c0 2.43-1.97 4.4-4.4 4.4A3.8 3.8 0 0 0 5.8 17.4 3.8 3.8 0 0 0 9.6 21c2.43 0 4.4-1.97 4.4-4.4V9.9c1.63 1.06 3.37 1.62 5.4 1.65V8.2c-1.9-.06-3.53-.62-5.4-1.7V3h-0z"/>
+          </svg>
+        </a>
+        <a class="icon" href="https://www.instagram.com/niel.stffs" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <title>Instagram</title>
+            <rect x="3" y="3" width="18" height="18" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/>
+            <circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/>
+            <circle cx="17.2" cy="6.8" r="1.5" fill="currentColor"/>
+          </svg>
+        </a>
+      </div>
     </div>
   </div>
 
@@ -248,12 +268,15 @@
         'images/hero.jpg',
         'images/IMG_7024.jpg',
         'images/IMG_7024.JPG',
-        'hero.jpg',           // root fallback
-        'IMG_7024.jpg'        // root fallback
+        'hero.jpg',
+        'IMG_7024.jpg'
       ];
       let i = 0;
       img.onerror = () => { if (++i < candidates.length) img.src = candidates[i]; };
       img.src = candidates[0];
+      img.style.width = '100%';
+      img.style.height = '100%';
+      img.style.objectFit = 'cover';
     })();
 
     // Mobile nav
