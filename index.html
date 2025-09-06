@@ -26,7 +26,7 @@
     a:hover{text-decoration:underline}
     .container{max-width:var(--max);margin:auto;padding:0 1rem}
 
-    /* Header (lighter, no logo N) */
+    /* Header (lighter, no N logo) */
     header.site{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.92);backdrop-filter:saturate(160%) blur(8px);border-bottom:1px solid var(--border)}
     .nav{display:flex;align-items:center;justify-content:space-between;height:var(--header)}
     .brand{display:flex;gap:.6rem;align-items:center}
@@ -34,15 +34,17 @@
     .menu{display:flex;gap:1rem;align-items:center}
     .menu a{padding:.45rem .7rem;border-radius:.7rem;color:var(--fg)}
     .menu a:hover{background:var(--card)}
-    .socials{display:flex;gap:.6rem;align-items:center;margin-left:.4rem;font-size:.95rem;color:var(--muted)}
-    .socials a{color:var(--muted)}
+    .socials{display:flex;gap:.5rem;align-items:center;margin-left:.3rem}
+    .icon{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:999px;background:#fff;border:1px solid var(--border);box-shadow:var(--shadow);font-size:18px}
+    .icon:hover{background:#fdfefe}
+    .icon span{line-height:1}
     .hamb{display:none}
     @media (max-width:900px){ .menu{display:none} .hamb{display:block} }
 
     /* Ensure sections don't hide under sticky header */
     section{scroll-margin-top:calc(var(--header) + 12px)}
 
-    /* Hero (full-bleed photo with soft overlay) */
+    /* Hero */
     .hero{position:relative;min-height:clamp(520px, 70vh, 760px);display:grid;align-items:end;border-bottom:1px solid var(--border)}
     .hero .bg {position:absolute;inset:0;overflow:hidden}
     .hero .bg img{width:100%;height:100%;object-fit:cover;filter:saturate(1.03) contrast(1.03)}
@@ -64,13 +66,6 @@
     .icons{font-size:1.8rem;display:flex;gap:.4rem;margin:.2rem 0 .4rem}
     @media (max-width:980px){ .grid{grid-template-columns:repeat(2,1fr)} }
     @media (max-width:640px){ .grid{grid-template-columns:1fr} }
-
-    /* Persuasive blocks */
-    .benefits{display:grid;gap:1rem;grid-template-columns:repeat(3,1fr)}
-    .benefits .b{background:#fff;border:1px solid var(--border);border-radius:14px;padding:1rem;box-shadow:var(--shadow)}
-    .steps{display:grid;gap:1rem;grid-template-columns:repeat(3,1fr)}
-    .step{background:#fff;border:1px solid var(--border);border-radius:14px;padding:1rem;box-shadow:var(--shadow)}
-    @media (max-width:900px){ .benefits,.steps{grid-template-columns:1fr} }
 
     /* Drawers (WhatsApp panel) must be above header */
     .drawer{position:fixed;inset:0;background:rgba(0,0,0,.35);display:none;z-index:200}
@@ -96,8 +91,12 @@
         <a href="#faq">FAQ</a>
         <a href="#contact">Contact</a>
         <span class="socials">
-          <a href="https://www.tiktok.com/@nielfitness" target="_blank" rel="noopener" aria-label="TikTok">@nielfitness</a> · 
-          <a href="https://www.instagram.com/niel.stffs" target="_blank" rel="noopener" aria-label="Instagram">@niel.stffs</a>
+          <a class="icon" href="https://www.tiktok.com/@nielfitness" target="_blank" rel="noopener" aria-label="TikTok">
+            <span aria-hidden="true">🎵</span>
+          </a>
+          <a class="icon" href="https://www.instagram.com/niel.stffs" target="_blank" rel="noopener" aria-label="Instagram">
+            <span aria-hidden="true">📸</span>
+          </a>
         </span>
       </nav>
       <button class="hamb" aria-label="Open menu" aria-controls="drawer" aria-expanded="false">☰</button>
@@ -108,10 +107,8 @@
     <!-- HERO -->
     <section class="hero" id="home" aria-label="Hero">
       <div class="bg">
-        <picture>
-          <source srcset="images/hero.webp" type="image/webp">
-          <img src="images/hero.jpg" alt="Progressfoto in de gym" width="1800" height="1200" />
-        </picture>
+        <!-- Robust fallback image loader -->
+        <img id="heroimg" alt="Progressfoto in de gym">
       </div>
       <div class="overlay" aria-hidden="true"></div>
       <div class="container content">
@@ -125,21 +122,14 @@
       </div>
     </section>
 
-    <!-- BENEFITS: self-selling copy -->
+    <!-- BENEFITS -->
     <section id="aanpak" class="section">
       <div class="container">
-        <h2 class="section-title">Waarom dit verkoopt zichzelf</h2>
-        <div class="benefits">
-          <div class="b"><h3>Doen i.p.v. twijfelen</h3><p>Precies weten wat je vandaag traint en eet. Geen tijdverlies met zoeken of raden.</p></div>
-          <div class="b"><h3>Accountability</h3><p>Check‑ins via WhatsApp houden je scherp. Terugval? We sturen bij.</p></div>
-          <div class="b"><h3>Duurzaam</h3><p>Schema’s die passen bij je leven, niet andersom. Resultaat dat blijft.</p></div>
-        </div>
-        <div style="height:1rem"></div>
-        <h2 class="section-title">Zo starten we</h2>
-        <div class="steps">
-          <div class="step"><h3>1) WhatsApp</h3><p>Je klikt en deelt kort je doel, ervaring en materiaal.</p></div>
-          <div class="step"><h3>2) Plan op maat</h3><p>Je ontvangt je schema(’s) + duidelijke instructies en uitleg.</p></div>
-          <div class="step"><h3>3) Wekelijkse bijsturing</h3><p>Feedback, aanpassingen en motivatie. Jij blijft op koers.</p></div>
+        <h2 class="section-title">Waarom dit zichzelf verkoopt</h2>
+        <div class="grid">
+          <article class="card"><h3>Doen i.p.v. twijfelen</h3><p>Precies weten wat je vandaag traint en eet. Geen tijdverlies met zoeken of raden.</p></article>
+          <article class="card"><h3>Accountability</h3><p>Check‑ins via WhatsApp houden je scherp. Terugval? We sturen bij.</p></article>
+          <article class="card"><h3>Duurzaam</h3><p>Schema’s die passen bij je leven, niet andersom. Resultaat dat blijft.</p></article>
         </div>
       </div>
     </section>
@@ -185,44 +175,28 @@
       </div>
     </section>
 
-    <!-- FAQ & CONTACT -->
+    <!-- FAQ -->
     <section id="faq" class="section">
       <div class="container">
         <h2 class="section-title">Veelgestelde vragen</h2>
         <div class="grid">
-          <article class="card">
-            <h3>Heb ik fancy materiaal nodig?</h3>
-            <p>Nee. Ik bouw het schema rond wat jij hebt (thuis of gym). Je krijgt alternatieven per oefening.</p>
-          </article>
-          <article class="card">
-            <h3>Moet ik een strikt dieet volgen?</h3>
-            <p>We werken met richtlijnen die vol te houden zijn. Geen crash‑dieet, wel structuur.</p>
-          </article>
-          <article class="card">
-            <h3>Hoe snel zie ik resultaat?</h3>
-            <p>Meestal zie je binnen 4–8 weken duidelijke progressie. Consequentie + slaap + voeding = winst.</p>
-          </article>
+          <article class="card"><h3>Heb ik fancy materiaal nodig?</h3><p>Nee. Ik bouw het schema rond wat jij hebt (thuis of gym). Je krijgt alternatieven per oefening.</p></article>
+          <article class="card"><h3>Moet ik een strikt dieet volgen?</h3><p>We werken met richtlijnen die vol te houden zijn. Geen crash‑dieet, wel structuur.</p></article>
+          <article class="card"><h3>Hoe snel zie ik resultaat?</h3><p>Meestal zie je binnen 4–8 weken duidelijke progressie. Consequentie + slaap + voeding = winst.</p></article>
         </div>
       </div>
     </section>
 
+    <!-- CONTACT (buttons only) -->
     <section id="contact" class="section">
       <div class="container">
         <h2 class="section-title">Contact</h2>
-        <p class="muted">Start direct via WhatsApp of stuur een bericht via het formulier.</p>
+        <p class="muted">Start direct via WhatsApp of volg me op social.</p>
         <p style="display:flex;gap:.6rem;flex-wrap:wrap">
           <a class="cta" href="https://wa.me/32494271445?text=Hallo!%20Ik%20wil%20meer%20info%20over%20coaching." target="_blank" rel="noopener"><strong>WhatsApp</strong> →</a>
           <a class="cta secondary" href="https://www.tiktok.com/@nielfitness" target="_blank" rel="noopener"><strong>TikTok</strong></a>
           <a class="cta secondary" href="https://www.instagram.com/niel.stffs" target="_blank" rel="noopener"><strong>Instagram</strong></a>
         </p>
-        <form name="contact" class="card" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-          <input type="hidden" name="form-name" value="contact" />
-          <p class="sr-only"><label>Laat dit veld leeg: <input name="bot-field" /></label></p>
-          <label>Naam<br><input required name="name" style="width:100%;padding:.8rem;border-radius:.6rem;border:1px solid var(--border);background:#fff;color:var(--fg);margin:.4rem 0"></label>
-          <label>E‑mail<br><input required type="email" name="email" style="width:100%;padding:.8rem;border-radius:.6rem;border:1px solid var(--border);background:#fff;color:var(--fg);margin:.4rem 0"></label>
-          <label>Bericht<br><textarea required name="message" rows="5" style="width:100%;padding:.8rem;border-radius:.6rem;border:1px solid var(--border);background:#fff;color:var(--fg);margin:.4rem 0"></textarea></label>
-          <button class="cta" type="submit"><strong>Verstuur</strong></button>
-        </form>
       </div>
     </section>
   </main>
@@ -257,8 +231,8 @@
       <a href="#pakketten">Pakketten</a>
       <a href="#faq">FAQ</a>
       <a href="#contact">Contact</a>
-      <a href="https://www.tiktok.com/@nielfitness" target="_blank" rel="noopener">TikTok @nielfitness</a>
-      <a href="https://www.instagram.com/niel.stffs" target="_blank" rel="noopener">Instagram @niel.stffs</a>
+      <a class="icon" href="https://www.tiktok.com/@nielfitness" target="_blank" rel="noopener" aria-label="TikTok">🎵</a>
+      <a class="icon" href="https://www.instagram.com/niel.stffs" target="_blank" rel="noopener" aria-label="Instagram">📸</a>
     </div>
   </div>
 
@@ -266,7 +240,23 @@
     // Jaar
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Mobiele navigatie
+    // Robust hero image loader: tries multiple filenames
+    (function(){
+      const img = document.getElementById('heroimg');
+      const candidates = [
+        'images/hero.webp',
+        'images/hero.jpg',
+        'images/IMG_7024.jpg',
+        'images/IMG_7024.JPG',
+        'hero.jpg',           // root fallback
+        'IMG_7024.jpg'        // root fallback
+      ];
+      let i = 0;
+      img.onerror = () => { if (++i < candidates.length) img.src = candidates[i]; };
+      img.src = candidates[0];
+    })();
+
+    // Mobile nav
     const hamb = document.querySelector('.hamb');
     const drawer = document.getElementById('drawer');
     const closeBtn = document.getElementById('closeDrawer');
@@ -274,7 +264,7 @@
     closeBtn?.addEventListener('click', () => { drawer.classList.remove('open'); drawer.hidden = true; hamb.setAttribute('aria-expanded','false'); });
     drawer?.addEventListener('click', (e)=>{ if(e.target === drawer){ closeBtn.click(); }});
 
-    // WhatsApp plan drawer (z-index above header)
+    // WhatsApp plan drawer
     const planDrawer = document.getElementById('planDrawer');
     const closePlan = document.getElementById('closePlanDrawer');
     const planNameEl = document.getElementById('planName');
