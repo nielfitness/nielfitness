@@ -25,7 +25,7 @@
     .brand{display:flex; gap:10px; align-items:center; font-family:Poppins, Inter; font-weight:800}
     .dot{width:10px; height:10px; border-radius:999px; background:linear-gradient(45deg,var(--brand),var(--brand-2)); box-shadow:0 0 12px rgba(14,165,233,.5)}
     nav{display:flex; gap:12px; align-items:center; justify-content:flex-end}
-    .btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:12px 18px; border-radius:12px; border:1px solid #cbd5e1; background:#fff; box-shadow:var(--shadow); font-weight:600; cursor:pointer}
+    .btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:12px 18px; border-radius:12px; border:1px solid #cbd5e1; background:#fff; box-shadow:var(--shadow); font-weight:600; cursor:pointer; min-height:44px}
     .btn:hover{transform:translateY(-1px)}
     .btn-primary{background:linear-gradient(180deg, #e6f4ff, #dff7ea); border:1px solid #bae6fd}
     .grid{display:grid; gap:16px}
@@ -46,7 +46,7 @@
     /* Form */
     .form{display:grid; gap:10px; margin-top:8px}
     .field{display:grid; gap:6px}
-    .input{padding:12px 14px; border-radius:12px; border:1px solid #cbd5e1; background:#fff; outline:none}
+    .input{padding:12px 14px; border-radius:12px; border:1px solid #cbd5e1; background:#fff; outline:none; font-size:16px}
     .input:focus{box-shadow:var(--focus)}
     .small{font-size:12px; color:#64748b}
     .error{color:var(--danger); font-size:13px; display:none}
@@ -57,22 +57,25 @@
       100%{ transform:translateY(0); box-shadow:0 0 0 0 rgba(34,197,94,0); }
     }
     .grabber{animation:pulseSoft 2.2s ease-in-out infinite}
-    /* Hero section with text above photo */
+    /* Hero */
     .hero{padding:24px 0}
     .hero h1{font-family:Poppins, Inter; font-size:clamp(28px, 4vw, 52px); line-height:1.1; margin:8px 0 8px}
     .eyebrow{display:inline-block; font-size:13px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted);}
     .kicker{color:var(--muted); margin:6px 0 18px}
-    /* Progress compare component */
-    .compare{position:relative; width:100%; max-width:100%; border-radius:16px; overflow:hidden; border:var(--border); background:#000}
-    .compare__img{width:100%; height:auto; display:block; object-fit:cover}
+    /* Progress compare */
+    .compare{position:relative; width:100%; max-width:100%; border-radius:16px; overflow:hidden; border:var(--border); background:#000; aspect-ratio:16 / 9}
+    .compare__img{width:100%; height:100%; display:block; object-fit:cover}
     .compare__overlay{position:absolute; inset:0 0 0 auto; width:50%; overflow:hidden}
-    .compare__range{position:absolute; left:0; right:0; bottom:12px; margin:0 auto; width:220px; appearance:none; height:6px; background:#e2e8f0; border-radius:999px; outline:none; border:none}
+    .compare__range{position:absolute; left:0; right:0; bottom:12px; margin:0 auto; width:240px; appearance:none; height:6px; background:#e2e8f0; border-radius:999px; outline:none; border:none}
     .compare__range::-webkit-slider-thumb{appearance:none; width:18px; height:18px; border-radius:50%; background:#0ea5e9; border:2px solid #fff; box-shadow:0 2px 6px rgba(0,0,0,.2)}
     .compare__handle{position:absolute; top:0; bottom:0; width:2px; background:#fff; left:50%; box-shadow:0 0 0 1px rgba(0,0,0,.2)}
     .compare__label{position:absolute; top:12px; left:12px; padding:6px 10px; border-radius:10px; background:rgba(255,255,255,.9); color:#0f172a; font-weight:600; font-size:12px}
     .compare__label--after{left:auto; right:12px}
     @media (max-width: 960px){
       .plans{grid-template-columns:1fr}
+    }
+    @media (max-width: 600px){
+      .compare{aspect-ratio:3 / 4}
     }
   </style>
 </head>
@@ -98,9 +101,9 @@
 
       <!-- Progressie: before/after slider -->
       <div class="compare" id="progressCompare" aria-label="Voor/Na vergelijking van resultaten">
-        <img src="images/progress_after.jpg" alt="Na: gespierdere fysiek" class="compare__img" loading="eager" fetchpriority="high">
+        <img id="imgAfter" src="images/progress_after.jpg" data-base="images/progress_after" alt="Na: gespierdere fysiek" class="compare__img" loading="eager" fetchpriority="high">
         <div class="compare__overlay" id="compareOverlay" style="width:50%">
-          <img src="images/progress_before.jpg" alt="Voor: startpunt fysiek" class="compare__img">
+          <img id="imgBefore" src="images/progress_before.jpg" data-base="images/progress_before" alt="Voor: startpunt fysiek" class="compare__img">
         </div>
         <div class="compare__handle" id="compareHandle" style="left:50%"></div>
         <span class="compare__label">Voor</span>
@@ -223,17 +226,31 @@
       let ticking = false;
       function onScroll(){
         const y = window.scrollY;
-        if (y > lastY && y > 60){ // scroll down
-          header.classList.add('hide');
-        } else { // scroll up
-          header.classList.remove('hide');
-        }
-        lastY = y;
-        ticking = false;
+        if (y > lastY && y > 60){ header.classList.add('hide'); } 
+        else { header.classList.remove('hide'); }
+        lastY = y; ticking = false;
       }
       window.addEventListener('scroll', () => {
         if(!ticking){ window.requestAnimationFrame(onScroll); ticking = true; }
       }, { passive:true });
+    })();
+
+    // Robust image fallback (tries other extensions if 404)
+    (function(){
+      function setupFallback(id){
+        const img = document.getElementById(id);
+        const base = img.dataset.base;
+        const exts = ['jpg','jpeg','JPG','JPEG','png','webp'];
+        let idx = 0;
+        img.addEventListener('error', () => {
+          if(idx >= exts.length) return;
+          const next = base + '.' + exts[idx++];
+          if(img.src.endsWith(next)) return;
+          img.src = next;
+        });
+      }
+      setupFallback('imgAfter');
+      setupFallback('imgBefore');
     })();
 
     // Before/After slider logic + intro animation
@@ -242,39 +259,29 @@
       const overlay = document.getElementById('compareOverlay');
       const handle = document.getElementById('compareHandle');
       let interacted = false;
-      function update(v){
-        overlay.style.width = v + '%';
-        handle.style.left = v + '%';
-      }
+      function update(v){ overlay.style.width = v + '%'; handle.style.left = v + '%'; }
       range.addEventListener('input', e => { interacted = true; update(e.target.value); });
-
-      // Intro animation: sweep from 20% -> 80% -> 50%
-      let start = null;
-      const D1 = 1400, D2 = 1200;
+      let start = null; const D1 = 1400, D2 = 1200;
       function easeInOutQuad(t){ return t<.5 ? 2*t*t : -1+(4-2*t)*t; }
       function step(ts){
-        if (interacted) return; // stop if user touched
+        if (interacted) return;
         if (!start) start = ts;
         const elapsed = ts - start;
         if (elapsed <= D1){
           const p = easeInOutQuad(elapsed / D1);
-          const v = 20 + (80-20)*p;
-          update(v);
+          update(20 + (80-20)*p);
           requestAnimationFrame(step);
         } else if (elapsed <= D1 + D2){
           const p = easeInOutQuad((elapsed - D1) / D2);
-          const v = 80 + (50-80)*p;
-          update(v);
+          update(80 + (50-80)*p);
           requestAnimationFrame(step);
-        } else {
-          update(50);
-        }
+        } else { update(50); }
       }
       requestAnimationFrame(step);
     })();
 
     // Email capture + redirect to WhatsApp
-    const EMAIL_ENDPOINT = "https://formspree.io/f/YOUR_ID_HERE"; // TODO: vervang door jouw endpoint
+    const EMAIL_ENDPOINT = "https://formspree.io/f/YOUR_ID_HERE"; // Vervang door jouw endpoint
     const freeForm = document.getElementById('freeForm');
     const freeBtn  = document.getElementById('freeBtn');
     function showErr(id, show){ const el = document.getElementById(id); if(!el) return; el.style.display = show ? 'block' : 'none'; }
