@@ -11,7 +11,7 @@
   <style>
     :root{
       --bg:#f7fafc; --surface:#ffffff; --surface-2:#f1f5f9; --text:#0f172a; --muted:#475569;
-      --brand:#0ea5e9; --brand-2:#22c55e; --danger:#ef4444; --ok:#16a34a;
+      --brand:#0ea5e9; --brand-2:#22c55e; --danger:#ef4444;
       --radius:16px; --shadow:0 10px 30px rgba(2,8,23,.08); --border:1px solid #e2e8f0;
       --focus: 0 0 0 3px rgba(14,165,233,.35);
     }
@@ -23,7 +23,7 @@
     header{position:sticky; top:0; background-color:rgba(255,255,255,.92); backdrop-filter:saturate(140%) blur(6px); border-bottom:var(--border); z-index:50; transition:transform .25s ease}
     header.hide{transform:translateY(-100%);}
     .brand{display:flex; gap:10px; align-items:center; font-family:Poppins, Inter; font-weight:800}
-    .dot{width:10px; height:10px; border-radius:999px; background:linear-gradient(45deg,var(--brand),var(--brand-2)); box-shadow:0 0 12px rgba(14,165,233,.5)}
+    .dot{width:10px; height:10px; border-radius:999px; background:linear-gradient(45deg,var(--brand),#22c55e); box-shadow:0 0 12px rgba(14,165,233,.5)}
     nav{display:flex; gap:12px; align-items:center; justify-content:flex-end}
     .btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:12px 18px; border-radius:12px; border:1px solid #cbd5e1; background:#fff; box-shadow:var(--shadow); font-weight:600; cursor:pointer; min-height:44px}
     .btn:hover{transform:translateY(-1px)}
@@ -35,48 +35,24 @@
     .muted{color:var(--muted)}
     section + section{margin-top:28px}
     footer{padding:56px 0; color:#64748b}
-    details{border:var(--border); border-radius:12px; padding:14px 16px; background:#fff}
-    details + details{margin-top:10px}
-    details summary{list-style:none; cursor:pointer; font-weight:600}
-    details summary::-webkit-details-marker{display:none}
-    details[open]{background:#f9fbff}
     .socials{display:flex; gap:14px; align-items:center; flex-wrap:wrap}
     .socials a{display:inline-flex; align-items:center; gap:10px; padding:10px 12px; border-radius:12px; border:1px solid #e2e8f0; background:#fff}
     .socials svg{width:22px; height:22px; display:block}
-    /* Form */
-    .form{display:grid; gap:10px; margin-top:8px}
-    .field{display:grid; gap:6px}
-    .input{padding:12px 14px; border-radius:12px; border:1px solid #cbd5e1; background:#fff; outline:none; font-size:16px}
-    .input:focus{box-shadow:var(--focus)}
-    .small{font-size:12px; color:#64748b}
-    .error{color:var(--danger); font-size:13px; display:none}
-    /* Attention grabber */
-    @keyframes pulseSoft{
-      0%{ transform:translateY(0); box-shadow:0 0 0 0 rgba(34,197,94,.35); }
-      70%{ transform:translateY(-2px); box-shadow:0 0 0 8px rgba(34,197,94,0); }
-      100%{ transform:translateY(0); box-shadow:0 0 0 0 rgba(34,197,94,0); }
-    }
-    .grabber{animation:pulseSoft 2.2s ease-in-out infinite}
-    /* Hero */
+    /* HERO */
     .hero{padding:24px 0}
     .hero h1{font-family:Poppins, Inter; font-size:clamp(28px, 4vw, 52px); line-height:1.1; margin:8px 0 8px}
     .eyebrow{display:inline-block; font-size:13px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted);}
     .kicker{color:var(--muted); margin:6px 0 18px}
-    /* Progress compare */
-    .compare{position:relative; width:100%; max-width:100%; border-radius:16px; overflow:hidden; border:var(--border); background:#000; aspect-ratio:16 / 9}
-    .compare__img{width:100%; height:100%; display:block; object-fit:cover}
-    .compare__overlay{position:absolute; inset:0 0 0 auto; width:50%; overflow:hidden}
-    .compare__range{position:absolute; left:0; right:0; bottom:12px; margin:0 auto; width:240px; appearance:none; height:6px; background:#e2e8f0; border-radius:999px; outline:none; border:none}
-    .compare__range::-webkit-slider-thumb{appearance:none; width:18px; height:18px; border-radius:50%; background:#0ea5e9; border:2px solid #fff; box-shadow:0 2px 6px rgba(0,0,0,.2)}
-    .compare__handle{position:absolute; top:0; bottom:0; width:2px; background:#fff; left:50%; box-shadow:0 0 0 1px rgba(0,0,0,.2)}
-    .compare__label{position:absolute; top:12px; left:12px; padding:6px 10px; border-radius:10px; background:rgba(255,255,255,.9); color:#0f172a; font-weight:600; font-size:12px}
-    .compare__label--after{left:auto; right:12px}
-    @media (max-width: 960px){
-      .plans{grid-template-columns:1fr}
-    }
-    @media (max-width: 600px){
-      .compare{aspect-ratio:3 / 4}
-    }
+
+    /* BEFORE/AFTER (no slider, compact, full image) */
+    .progress{border:var(--border); border-radius:16px; background:#fff; box-shadow:var(--shadow); padding:10px}
+    .progress-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px; align-items:center}
+    .photo{position:relative; background:#000; border-radius:12px; overflow:hidden; height:220px}
+    .photo img{width:100%; height:100%; object-fit:contain; background:#000}
+    .label{position:absolute; top:8px; left:8px; font-weight:700; font-size:12px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.92); color:#0f172a}
+    .label.right{left:auto; right:8px}
+    @media (max-width: 900px){ .photo{height:200px} }
+    @media (max-width: 600px){ .photo{height:180px} }
   </style>
 </head>
 <body>
@@ -93,32 +69,34 @@
   </header>
 
   <main class="container">
-    <!-- TEKST BOVEN FOTO -->
     <section class="hero" aria-labelledby="hero-title">
       <span class="eyebrow">Online coaching</span>
       <h1 id="hero-title">Simpele structuur. Zichtbaar resultaat.</h1>
       <p class="kicker">Alle schema's zijn maandelijks. Kies wat past: enkel training, training + voeding, of probeer gratis een dagprogramma.</p>
 
-      <!-- Progressie: before/after slider -->
-      <div class="compare" id="progressCompare" aria-label="Voor/Na vergelijking van resultaten">
-        <img id="imgAfter" src="progress_after.jpg" data-base="progress_after" alt="Na: gespierdere fysiek" class="compare__img" loading="eager" fetchpriority="high">
-        <div class="compare__overlay" id="compareOverlay" style="width:50%">
-          <img id="imgBefore" src="progress_before.jpg" data-base="progress_before" alt="Voor: startpunt fysiek" class="compare__img">
+      <!-- NO SLIDER: Voor (links) — Na (rechts) -->
+      <div class="progress" aria-label="Voor en na">
+        <div class="progress-grid">
+          <!-- Links: Voor -->
+          <figure class="photo">
+            <img id="imgBefore" src="images/progress_before.jpg" alt="Voor: startpunt">
+            <figcaption class="label">Voor</figcaption>
+          </figure>
+          <!-- Rechts: Na -->
+          <figure class="photo">
+            <img id="imgAfter" src="images/progress_after.jpg" alt="Na: resultaat">
+            <figcaption class="label right">Na</figcaption>
+          </figure>
         </div>
-        <div class="compare__handle" id="compareHandle" style="left:50%"></div>
-        <span class="compare__label">Voor</span>
-        <span class="compare__label compare__label--after">Na</span>
-        <input id="compareRange" class="compare__range" type="range" min="0" max="100" value="50" aria-label="Schuif om voor/na te vergelijken">
       </div>
     </section>
 
     <!-- DRIE PAKKETTEN NAAST ELKAAR -->
     <section class="grid plans" aria-label="Pakketten">
-      <!-- GRATIS -->
       <article class="card" aria-labelledby="p0h">
         <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
           <h3 id="p0h" style="margin:0;">Gratis 1-dag schema</h3>
-          <span class="btn grabber" style="padding:8px 12px; border:1px solid #bbf7d0; background:#f0fdf4; color:#166534;">GRATIS</span>
+          <span class="btn" style="padding:8px 12px; border:1px solid #bbf7d0; background:#f0fdf4; color:#166534;">GRATIS</span>
         </div>
         <p class="muted">Kies een trainingsdag naar keuze. Vul je e-mail in en ontvang direct + redirect naar WhatsApp.</p>
         <form id="freeForm" class="form" novalidate>
@@ -153,7 +131,6 @@
         </form>
       </article>
 
-      <!-- BASIS -->
       <article class="card" aria-labelledby="p1h">
         <h3 id="p1h">Basis</h3>
         <p class="muted">Persoonlijk trainingsschema.</p>
@@ -161,7 +138,6 @@
         <a class="btn btn-primary" target="_blank" rel="noopener noreferrer" href="https://wa.me/32494271445?text=Ik%20wil%20starten%20met%20het%20Basis%20pakket.">Start Basis</a>
       </article>
 
-      <!-- COMPLETE -->
       <article class="card" aria-labelledby="p2h">
         <h3 id="p2h">Complete</h3>
         <p class="muted">Trainings- en voedingsschema's.</p>
@@ -183,7 +159,6 @@
     <section id="contact" class="card">
       <h2 style="margin-top:0">Contact</h2>
       <div class="socials">
-        <!-- WhatsApp -->
         <a href="https://wa.me/32494271445" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">
           <svg viewBox="0 0 256 256" aria-hidden="true">
             <path fill="#25D366" d="M128 20a108 108 0 1 0 0 216 108 108 0 0 0 0-216z"/>
@@ -191,7 +166,6 @@
           </svg>
           WhatsApp
         </a>
-        <!-- TikTok -->
         <a href="https://www.tiktok.com/@nielfitness" target="_blank" rel="noopener" aria-label="TikTok" title="TikTok @nielfitness">
           <svg viewBox="0 0 256 256" width="22" height="22" aria-hidden="true">
             <path fill="#000" d="M0 0h256v256H0z" fill-opacity="0"/>
@@ -199,7 +173,6 @@
           </svg>
           @nielfitness
         </a>
-        <!-- Instagram -->
         <a href="https://www.instagram.com/niel.stffs" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram @niel.stffs">
           <svg viewBox="0 0 256 256" width="22" height="22" aria-hidden="true">
             <rect x="36" y="36" width="184" height="184" rx="48" fill="none" stroke="#000" stroke-width="16"/>
@@ -235,53 +208,25 @@
       }, { passive:true });
     })();
 
-    // Robust image fallback (tries other extensions if 404)
+    // Robust image fallback: tries images/ and root, and multiple extensions
     (function(){
-      function setupFallback(id){
-        const img = document.getElementById(id);
-        const base = img.dataset.base;
+      function setupFallback(img, bases){
         const exts = ['jpg','jpeg','JPG','JPEG','png','webp'];
-        let idx = 0;
+        let bi = 0, ei = 0;
         img.addEventListener('error', () => {
-          if(idx >= exts.length) return;
-          const next = base + '.' + exts[idx++];
-          if(img.src.endsWith(next)) return;
-          img.src = next;
+          if (bi >= bases.length && ei >= exts.length) return;
+          ei++;
+          if (ei >= exts.length){ ei = 0; bi++; }
+          if (bi >= bases.length) return;
+          img.src = bases[bi] + '.' + exts[ei];
         });
       }
-      setupFallback('imgAfter');
-      setupFallback('imgBefore');
+      setupFallback(document.getElementById('imgBefore'), ['images/progress_before','progress_before']);
+      setupFallback(document.getElementById('imgAfter'),  ['images/progress_after', 'progress_after']);
     })();
 
-    // Before/After slider logic + intro animation
-    (function(){
-      const range = document.getElementById('compareRange');
-      const overlay = document.getElementById('compareOverlay');
-      const handle = document.getElementById('compareHandle');
-      let interacted = false;
-      function update(v){ overlay.style.width = v + '%'; handle.style.left = v + '%'; }
-      range.addEventListener('input', e => { interacted = true; update(e.target.value); });
-      let start = null; const D1 = 1400, D2 = 1200;
-      function easeInOutQuad(t){ return t<.5 ? 2*t*t : -1+(4-2*t)*t; }
-      function step(ts){
-        if (interacted) return;
-        if (!start) start = ts;
-        const elapsed = ts - start;
-        if (elapsed <= D1){
-          const p = easeInOutQuad(elapsed / D1);
-          update(20 + (80-20)*p);
-          requestAnimationFrame(step);
-        } else if (elapsed <= D1 + D2){
-          const p = easeInOutQuad((elapsed - D1) / D2);
-          update(80 + (50-80)*p);
-          requestAnimationFrame(step);
-        } else { update(50); }
-      }
-      requestAnimationFrame(step);
-    })();
-
-    // Email capture + redirect to WhatsApp
-    const EMAIL_ENDPOINT = "https://formspree.io/f/YOUR_ID_HERE"; // Vervang door jouw endpoint
+    // Form: email + redirect WhatsApp
+    const EMAIL_ENDPOINT = "https://formspree.io/f/YOUR_ID_HERE"; // vervang door jouw endpoint
     const freeForm = document.getElementById('freeForm');
     const freeBtn  = document.getElementById('freeBtn');
     function showErr(id, show){ const el = document.getElementById(id); if(!el) return; el.style.display = show ? 'block' : 'none'; }
